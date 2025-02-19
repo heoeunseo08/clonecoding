@@ -14,10 +14,12 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<Map<String, String>> datas = [];
+  late int _currentPageIndex;
 
   @override
   void initState() {
     super.initState();
+    _currentPageIndex = 0;
     datas = [
       {
         "image": "assets/images/ara-1.jpg",
@@ -222,11 +224,59 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  BottomNavigationBarItem _bottomNavigationBarItem(
+      {required String iconname, required String label}) {
+    return BottomNavigationBarItem(
+        icon: Padding(
+          padding: const EdgeInsets.only(bottom: 3),
+          child: SvgPicture.asset(
+            "assets/svg/${iconname}_off.svg",
+            width: 22,
+          ),
+        ),
+        label: label);
+  }
+
+  Widget _bottomNavigationBarWidget() {
+    return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
+      onTap: (int index) {
+        setState(() {
+          _currentPageIndex = index;
+        });
+      },
+      currentIndex: _currentPageIndex,
+      items: [
+        _bottomNavigationBarItem(
+          iconname: "home",
+          label: "홈",
+        ),
+        _bottomNavigationBarItem(
+          iconname: "notes",
+          label: "동네생활",
+        ),
+        _bottomNavigationBarItem(
+          iconname: "location",
+          label: "내 근처",
+        ),
+        _bottomNavigationBarItem(
+          iconname: "chat",
+          label: "채팅",
+        ),
+        _bottomNavigationBarItem(
+          iconname: "user",
+          label: "나의 당근",
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appbarWidget(),
       body: _bodyWidget(),
+      bottomNavigationBar: _bottomNavigationBarWidget(),
     );
   }
 }
