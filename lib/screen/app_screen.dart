@@ -1,3 +1,4 @@
+import 'package:clonecoding/screen/favorite_screen.dart';
 import 'package:clonecoding/screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -93,21 +94,19 @@ class _AppScreenState extends State<AppScreen> {
             case 0:
               return HomeScreen();
             case 1:
-              return Container(
+              return Center(
                 child: Text("동네 생활"),
               );
             case 2:
-              return Container(
+              return Center(
                 child: Text("내 근처"),
               );
             case 3:
-              return Container(
+              return Center(
                 child: Text("채팅"),
               );
             case 4:
-              return Container(
-                child: Text("나의 당근"),
-              );
+              return MyFavoriteContentScreen();
             default:
               return Container();
           }
